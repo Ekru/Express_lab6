@@ -1,0 +1,49 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Us Form</title> 
+
+  </head>
+  <body>    
+    <h1>Contact Us</h1>
+    <% if(!con.success){ %>
+      <ul>
+        <% for(var i=0;i < con.errors.length;i++){ %>
+            <li> <%=con.errors[i].msg %>   </li>
+        <% } %>
+      </ul>
+      <form action = '/users/contactus' method="post">
+        <input type="text" name="fullName" placeholder="Full Name"/> 
+        <br/>
+        <select name="type">
+          <option value="suggestion" selected>Suggestion</option>
+          <option value="complaint">Complaint</option>
+        </select> 
+        <br/>
+        <textarea name="message" rows="10" cols="60"></textarea>
+
+        <input type="hidden" name="_csrf" value="<%=con.csrfToken%>"/>
+        <br/>
+        <input type ="submit" value="Submit"/>
+      </form>
+    <% } else{ %>   
+      <form action = '/users/contactus' method="post">
+        <input type="text" name="fullName" placeholder="Full Name"/> 
+        <br/>
+        <select name="type">
+          <option value="suggestion" selected>Suggestion</option>
+          <option value="complaint">Complaint</option>
+        </select> 
+        <br/>
+        <textarea name="message" rows="10" cols="60">        
+        </textarea>
+
+        <input type="hidden" name="_csrf" value="<%=con.csrfToken%>"/>
+        <br/>
+        <input type ="submit" value="Submit"/>
+      </form>
+    <% } %>
+
+  </body>
+</html>
